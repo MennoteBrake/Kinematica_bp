@@ -1,0 +1,10 @@
+/src/
+/.deps/
+/config.log
+/config.status
+/libtool
+/Makefile
+/build.log
+
+/compile_commands.json
+/Doxyfile
