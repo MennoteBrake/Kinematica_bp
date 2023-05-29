@@ -183,7 +183,7 @@ namespace Application
 					wxGBPosition( 1, 1),
 					wxGBSpan( 1, 1),
 					wxSHRINK);
-		robotWorldCanvas->SetMinSize( wxSize( 500,500));
+		robotWorldCanvas->SetMinSize( wxSize( 1024,1024));
 
 		sizer->Add( 5, 5,
 					wxGBPosition( 2, 2),
@@ -370,6 +370,47 @@ namespace Application
 				   wxSHRINK | wxALIGN_CENTER);
 		speedSpinCtrl->SetValue(static_cast<int>(10));
 		speedSpinCtrl->Bind(wxEVT_COMMAND_SPINCTRL_UPDATED,[this](wxCommandEvent& event){this->OnSpeedSpinCtrlUpdate(event);});
+
+		// Particle or kalman filter
+		std::array<std::string, 2> filterSelectArray
+		{
+			"Kalman Filter",
+			"ParticleFilter"
+		};
+
+		sizer->Add(	worldNumber = makeRadiobox(	panel,
+												filterSelectArray,
+												[this](wxCommandEvent& event)
+												{
+													wxRadioBox* radiobox = dynamic_cast< wxRadioBox* >(event.GetEventObject());
+													if(radiobox)
+													{
+														switch(radiobox->GetSelection())
+														{
+															case 0:
+															{
+//																//OnWorld1(event);
+																break;
+															}
+															case 1:
+															{
+																//OnWorld2(event);
+																break;
+															}
+															default:
+															{
+																TRACE_DEVELOP("Unknown filter selection");
+															}
+														}
+													}
+												},
+												"Filter type",
+												wxRA_SPECIFY_ROWS),
+												wxGBPosition( 3, 2),
+												wxGBSpan( 1, 1),
+												wxSHRINK | wxALIGN_CENTER);
+
+		// world select
 
 		std::array<std::string,3> choicesArray
 		{
@@ -679,7 +720,7 @@ namespace Application
 			}
 			case 1:
 			{
-				TRACE_DEVELOP("Please create your own student world 1");
+				robotWorldCanvas->populateStudentWorld(4);
 				break;
 			}
 			case 2:

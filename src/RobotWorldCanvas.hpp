@@ -166,6 +166,11 @@ namespace View
 			 * Asks the world to populates itself with a robot, a goal and the given number of walls
 			 */
 			void populate( int aNumberOfWalls = 2);
+
+			/**
+			 * @brief asks the world to populate itself with a world designed by the student.
+			 */
+			void populateStudentWorld( int aNumberOfWalls /*= 2*/);
 			/**
 			 * Removes everything from the world
 			 */

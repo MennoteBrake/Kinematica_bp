@@ -297,6 +297,21 @@ namespace Model
 
 		notifyObservers();
 	}
+
+	void RobotWorld::populateStudentWorld( int UNUSEDPARAM(aNumberOfWalls))
+		{
+			RobotWorld::getRobotWorld().newRobot( "Robot", wxPoint(163,111),false); // @suppress("Avoid magic numbers")
+
+			RobotWorld::getRobotWorld().newWall( wxPoint(800, 0), wxPoint(800, 300) ,false); // @suppress("Avoid magic numbers")
+			RobotWorld::getRobotWorld().newWall( wxPoint(250, 700), wxPoint(650, 700) ,false); // @suppress("Avoid magic numbers")
+			RobotWorld::getRobotWorld().newWall( wxPoint(780 ,1024), wxPoint(1024, 400) ,false); // @suppress("Avoid magic numbers")
+
+			RobotWorld::getRobotWorld().newWall( wxPoint(7,234), wxPoint(419,234) ,false); // @suppress("Avoid magic numbers")
+			RobotWorld::getRobotWorld().newGoal( "Goal", wxPoint(320,285),false); // @suppress("Avoid magic numbers")
+
+
+			notifyObservers();
+		}
 	/**
 	 *
 	 */

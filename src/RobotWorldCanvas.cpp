@@ -449,6 +449,12 @@ namespace View
 	{
 		Model::RobotWorld::getRobotWorld().populate(aNumberOfWalls);
 	}
+
+	void RobotWorldCanvas::populateStudentWorld( int aNumberOfWalls /*= 2*/)
+		{
+			Model::RobotWorld::getRobotWorld().populateStudentWorld(aNumberOfWalls);
+		}
+
 	/**
 	 *
 	 */

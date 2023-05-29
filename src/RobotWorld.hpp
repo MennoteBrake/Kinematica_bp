@@ -127,6 +127,12 @@ namespace Model
 			 *
 			 */
 			void populate( int aNumberOfWalls = 2);
+
+
+			/**
+			 * @brief function to populate the student world with 4 walls, a robot, and a goal
+			 */
+			void populateStudentWorld( int aNumberOfWalls = 2);
 			/**
 			 *
 			 */
