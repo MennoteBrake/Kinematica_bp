@@ -19,6 +19,8 @@
 #include <mutex>
 #include <string>
 #include <thread>
+#include "Compass.hpp"
+#include "Lidar.hpp"
 
 namespace Messaging
 {

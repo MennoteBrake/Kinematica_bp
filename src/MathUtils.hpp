@@ -28,6 +28,16 @@ namespace Utils
 			 *
 			 */
 			static double toDegrees( double aRadian);
+
+			/**
+			 * @brief Uses STDEV to transform data
+			 *
+			 * @param stdev the standard deviation to use
+			 * @param data the data to transform
+			 *
+			 * @return deviated data
+			 */
+			static double deviateData(const double& stdev, const double& data);
 	}; // class Math
 }// namespace Utils
 #endif // MATHUTILS_HPP_

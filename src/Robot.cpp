@@ -433,6 +433,10 @@ namespace Model
 			{
 				sensor->setOn();
 			}
+
+			Lidar Lidar(10);
+			Lidar.measureDistance(getPosition());
+			while (true){};
 		
 			// The runtime value always wins!!
 			speed = static_cast<float>(Application::MainApplication::getSettings().getSpeed());

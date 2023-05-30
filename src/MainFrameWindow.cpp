@@ -372,10 +372,11 @@ namespace Application
 		speedSpinCtrl->Bind(wxEVT_COMMAND_SPINCTRL_UPDATED,[this](wxCommandEvent& event){this->OnSpeedSpinCtrlUpdate(event);});
 
 		// Particle or kalman filter
-		std::array<std::string, 2> filterSelectArray
+		std::array<std::string, 3> filterSelectArray
 		{
 			"Kalman Filter",
-			"ParticleFilter"
+			"ParticleFilter",
+			"Kalman en Particle Filter"
 		};
 
 		sizer->Add(	worldNumber = makeRadiobox(	panel,
