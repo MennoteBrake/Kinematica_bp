@@ -1,0 +1,3 @@
+stdevCompas: 2.0
+stdevOdometry: 0.1
+stdevLidar: 10

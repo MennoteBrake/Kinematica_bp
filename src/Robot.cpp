@@ -27,12 +27,14 @@ namespace Model
 	 */
 	Robot::Robot() : Robot("", wxDefaultPosition)
 	{
+		fileReader.setFileName(settingFileName);
 	}
 	/**
 	 *
 	 */
 	Robot::Robot( const std::string& aName) : Robot(aName, wxDefaultPosition)
 	{
+		fileReader.setFileName(settingFileName);
 	}
 	/**
 	 *
@@ -50,9 +52,9 @@ namespace Model
 	{
 		std::shared_ptr< AbstractSensor > laserSensor = std::make_shared<LaserDistanceSensor>( *this);
 		attachSensor( laserSensor);
-
 		// We use the real position for starters, not an estimated position.
 		startPosition = position;
+		fileReader.setFileName(settingFileName);
 	}
 	/**
 	 *
@@ -434,10 +436,6 @@ namespace Model
 				sensor->setOn();
 			}
 
-			Lidar Lidar(10);
-			Lidar.measureDistance(getPosition());
-			while (true){};
-		
 			// The runtime value always wins!!
 			speed = static_cast<float>(Application::MainApplication::getSettings().getSpeed());
 

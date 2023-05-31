@@ -19,8 +19,10 @@
 #include <mutex>
 #include <string>
 #include <thread>
+
 #include "Compass.hpp"
 #include "Lidar.hpp"
+#include "FileReader.hpp"
 
 namespace Messaging
 {
@@ -332,6 +334,12 @@ namespace Model
 			 *
 			 */
 			Messaging::ServerPtr server;
+
+			/**
+			 * Object of the fileReader, can be used to read settings from the configuration file
+			 */
+			FileReader fileReader;
+			const std::string settingFileName = "sensor_configurations.txt";
 	};
 } // namespace Model
 #endif // ROBOT_HPP_

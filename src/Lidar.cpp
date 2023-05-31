@@ -10,7 +10,7 @@
 #include "RobotWorld.hpp"
 #include "Wall.hpp"
 #include "Shape2DUtils.hpp"
-#include "Logger.hpp"
+
 Lidar::Lidar() : stdev(0)
 {
 
@@ -63,7 +63,6 @@ std::vector<double> Lidar::measureDistance(const wxPoint& robotPosition)
 		if (dist < 1025)
 		{
 			distances.push_back(Utils::MathUtils::deviateData(stdev, dist));
-			Application::Logger::log("added " + std::to_string( dist));
 		}
 		else
 		{
