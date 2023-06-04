@@ -436,6 +436,9 @@ namespace Model
 				sensor->setOn();
 			}
 
+//			Lidar lidar(10);
+//			lidar.measureDistance(getPosition());
+
 			// The runtime value always wins!!
 			speed = static_cast<float>(Application::MainApplication::getSettings().getSpeed());
 
@@ -447,6 +450,11 @@ namespace Model
 
 			// We use the real position for starters, not an estimated position.
 			startPosition = position;
+
+			Odometry odometer(0.1);
+			Compass compass = Compass(2);
+			kalman.initValues(startPosition);
+			particleFilter.generateParicles(300);
 
 			unsigned pathPoint = 0;
 			while (position.x > 0 && position.x < 1024 && position.y > 0 && position.y < 1024 && pathPoint < path.size()) // @suppress("Avoid magic numbers")
@@ -485,6 +493,9 @@ namespace Model
 				}
 
 				// Update the belief
+				//kalman.calculatePosition(vertex.asPoint(), odometer.measureOdometry(speed), compass.getDirection(front));
+
+
 
 				// Stop on arrival or collision
 				if (arrived(goal) || collision())
@@ -586,5 +597,21 @@ namespace Model
 		}
 		return false;
 	}
+
+	std::vector<wxPoint> Robot::getKalmanRoute()
+	{
+		return kalman.getDrivenRoute();
+	}
+
+	std::vector<wxPoint> Robot::getParticleFilterRoute()
+	{
+		return particleFilter.getDrivenRoute();
+	}
+
+	std::vector<Particle> Robot::getParticles()
+	{
+		return particleFilter.getParticles();
+	}
+
 
 } // namespace Model

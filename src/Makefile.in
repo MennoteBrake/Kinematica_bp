@@ -136,7 +136,10 @@ am_robotworld_OBJECTS = robotworld-AbstractActuator.$(OBJEXT) \
 	robotworld-WayPointShape.$(OBJEXT) \
 	robotworld-WidgetTraceFunction.$(OBJEXT) \
 	robotworld-Widgets.$(OBJEXT) robotworld-Lidar.$(OBJEXT) \
-	robotworld-Compass.$(OBJEXT) robotworld-FileReader.$(OBJEXT)
+	robotworld-Compass.$(OBJEXT) robotworld-FileReader.$(OBJEXT) \
+	robotworld-KalmanFilter.$(OBJEXT) \
+	robotworld-Odometry.$(OBJEXT) robotworld-Particle.$(OBJEXT) \
+	robotworld-ParticleFilter.$(OBJEXT)
 robotworld_OBJECTS = $(am_robotworld_OBJECTS)
 am__DEPENDENCIES_1 =
 robotworld_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -174,6 +177,7 @@ am__depfiles_remade = ./$(DEPDIR)/robotworld-AStar.Po \
 	./$(DEPDIR)/robotworld-FileTraceFunction.Po \
 	./$(DEPDIR)/robotworld-Goal.Po \
 	./$(DEPDIR)/robotworld-GoalShape.Po \
+	./$(DEPDIR)/robotworld-KalmanFilter.Po \
 	./$(DEPDIR)/robotworld-LaserDistanceSensor.Po \
 	./$(DEPDIR)/robotworld-Lidar.Po \
 	./$(DEPDIR)/robotworld-LineShape.Po \
@@ -189,6 +193,9 @@ am__depfiles_remade = ./$(DEPDIR)/robotworld-AStar.Po \
 	./$(DEPDIR)/robotworld-Notifier.Po \
 	./$(DEPDIR)/robotworld-ObjectId.Po \
 	./$(DEPDIR)/robotworld-Observer.Po \
+	./$(DEPDIR)/robotworld-Odometry.Po \
+	./$(DEPDIR)/robotworld-Particle.Po \
+	./$(DEPDIR)/robotworld-ParticleFilter.Po \
 	./$(DEPDIR)/robotworld-RectangleShape.Po \
 	./$(DEPDIR)/robotworld-Robot.Po \
 	./$(DEPDIR)/robotworld-RobotShape.Po \
@@ -225,6 +232,24 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_@AM_V@)
+am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 SOURCES = $(robotworld_SOURCES)
 DIST_SOURCES = $(robotworld_SOURCES)
 am__can_run_installinfo = \
@@ -477,7 +502,12 @@ robotworld_SOURCES = AbstractActuator.cpp	\
 						Widgets.cpp		\
 						Lidar.cpp	\
 						Compass.cpp	\
-						FileReader.cpp		
+						FileReader.cpp		\
+						Matrix.inc	\
+						KalmanFilter.cpp \
+						Odometry.cpp \
+						Particle.cpp \
+						ParticleFilter.cpp
 
 robotworld_CPPFLAGS = $(AM_CPPFLAGS) $(ROBOTWORLD_CPPFLAGS) $(WX_CPPFLAGS)
 robotworld_CFLAGS = $(AM_CFLAGS)   $(ROBOTWORLD_CFLAGS)	  $(WX_CFLAGS)
@@ -604,6 +634,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-FileTraceFunction.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Goal.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-GoalShape.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-KalmanFilter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-LaserDistanceSensor.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Lidar.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-LineShape.Po@am__quote@ # am--include-marker
@@ -619,6 +650,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Notifier.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-ObjectId.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Observer.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Odometry.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Particle.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-ParticleFilter.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-RectangleShape.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-Robot.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/robotworld-RobotShape.Po@am__quote@ # am--include-marker
@@ -1269,6 +1303,62 @@ robotworld-FileReader.obj: FileReader.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-FileReader.obj `if test -f 'FileReader.cpp'; then $(CYGPATH_W) 'FileReader.cpp'; else $(CYGPATH_W) '$(srcdir)/FileReader.cpp'; fi`
 
+robotworld-KalmanFilter.o: KalmanFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-KalmanFilter.o -MD -MP -MF $(DEPDIR)/robotworld-KalmanFilter.Tpo -c -o robotworld-KalmanFilter.o `test -f 'KalmanFilter.cpp' || echo '$(srcdir)/'`KalmanFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-KalmanFilter.Tpo $(DEPDIR)/robotworld-KalmanFilter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='KalmanFilter.cpp' object='robotworld-KalmanFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-KalmanFilter.o `test -f 'KalmanFilter.cpp' || echo '$(srcdir)/'`KalmanFilter.cpp
+
+robotworld-KalmanFilter.obj: KalmanFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-KalmanFilter.obj -MD -MP -MF $(DEPDIR)/robotworld-KalmanFilter.Tpo -c -o robotworld-KalmanFilter.obj `if test -f 'KalmanFilter.cpp'; then $(CYGPATH_W) 'KalmanFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/KalmanFilter.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-KalmanFilter.Tpo $(DEPDIR)/robotworld-KalmanFilter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='KalmanFilter.cpp' object='robotworld-KalmanFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-KalmanFilter.obj `if test -f 'KalmanFilter.cpp'; then $(CYGPATH_W) 'KalmanFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/KalmanFilter.cpp'; fi`
+
+robotworld-Odometry.o: Odometry.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-Odometry.o -MD -MP -MF $(DEPDIR)/robotworld-Odometry.Tpo -c -o robotworld-Odometry.o `test -f 'Odometry.cpp' || echo '$(srcdir)/'`Odometry.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-Odometry.Tpo $(DEPDIR)/robotworld-Odometry.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Odometry.cpp' object='robotworld-Odometry.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-Odometry.o `test -f 'Odometry.cpp' || echo '$(srcdir)/'`Odometry.cpp
+
+robotworld-Odometry.obj: Odometry.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-Odometry.obj -MD -MP -MF $(DEPDIR)/robotworld-Odometry.Tpo -c -o robotworld-Odometry.obj `if test -f 'Odometry.cpp'; then $(CYGPATH_W) 'Odometry.cpp'; else $(CYGPATH_W) '$(srcdir)/Odometry.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-Odometry.Tpo $(DEPDIR)/robotworld-Odometry.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Odometry.cpp' object='robotworld-Odometry.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-Odometry.obj `if test -f 'Odometry.cpp'; then $(CYGPATH_W) 'Odometry.cpp'; else $(CYGPATH_W) '$(srcdir)/Odometry.cpp'; fi`
+
+robotworld-Particle.o: Particle.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-Particle.o -MD -MP -MF $(DEPDIR)/robotworld-Particle.Tpo -c -o robotworld-Particle.o `test -f 'Particle.cpp' || echo '$(srcdir)/'`Particle.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-Particle.Tpo $(DEPDIR)/robotworld-Particle.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Particle.cpp' object='robotworld-Particle.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-Particle.o `test -f 'Particle.cpp' || echo '$(srcdir)/'`Particle.cpp
+
+robotworld-Particle.obj: Particle.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-Particle.obj -MD -MP -MF $(DEPDIR)/robotworld-Particle.Tpo -c -o robotworld-Particle.obj `if test -f 'Particle.cpp'; then $(CYGPATH_W) 'Particle.cpp'; else $(CYGPATH_W) '$(srcdir)/Particle.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-Particle.Tpo $(DEPDIR)/robotworld-Particle.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Particle.cpp' object='robotworld-Particle.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-Particle.obj `if test -f 'Particle.cpp'; then $(CYGPATH_W) 'Particle.cpp'; else $(CYGPATH_W) '$(srcdir)/Particle.cpp'; fi`
+
+robotworld-ParticleFilter.o: ParticleFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-ParticleFilter.o -MD -MP -MF $(DEPDIR)/robotworld-ParticleFilter.Tpo -c -o robotworld-ParticleFilter.o `test -f 'ParticleFilter.cpp' || echo '$(srcdir)/'`ParticleFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-ParticleFilter.Tpo $(DEPDIR)/robotworld-ParticleFilter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ParticleFilter.cpp' object='robotworld-ParticleFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-ParticleFilter.o `test -f 'ParticleFilter.cpp' || echo '$(srcdir)/'`ParticleFilter.cpp
+
+robotworld-ParticleFilter.obj: ParticleFilter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -MT robotworld-ParticleFilter.obj -MD -MP -MF $(DEPDIR)/robotworld-ParticleFilter.Tpo -c -o robotworld-ParticleFilter.obj `if test -f 'ParticleFilter.cpp'; then $(CYGPATH_W) 'ParticleFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/ParticleFilter.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/robotworld-ParticleFilter.Tpo $(DEPDIR)/robotworld-ParticleFilter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ParticleFilter.cpp' object='robotworld-ParticleFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(robotworld_CPPFLAGS) $(CPPFLAGS) $(robotworld_CXXFLAGS) $(CXXFLAGS) -c -o robotworld-ParticleFilter.obj `if test -f 'ParticleFilter.cpp'; then $(CYGPATH_W) 'ParticleFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/ParticleFilter.cpp'; fi`
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
@@ -1413,6 +1503,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/robotworld-FileTraceFunction.Po
 	-rm -f ./$(DEPDIR)/robotworld-Goal.Po
 	-rm -f ./$(DEPDIR)/robotworld-GoalShape.Po
+	-rm -f ./$(DEPDIR)/robotworld-KalmanFilter.Po
 	-rm -f ./$(DEPDIR)/robotworld-LaserDistanceSensor.Po
 	-rm -f ./$(DEPDIR)/robotworld-Lidar.Po
 	-rm -f ./$(DEPDIR)/robotworld-LineShape.Po
@@ -1428,6 +1519,9 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/robotworld-Notifier.Po
 	-rm -f ./$(DEPDIR)/robotworld-ObjectId.Po
 	-rm -f ./$(DEPDIR)/robotworld-Observer.Po
+	-rm -f ./$(DEPDIR)/robotworld-Odometry.Po
+	-rm -f ./$(DEPDIR)/robotworld-Particle.Po
+	-rm -f ./$(DEPDIR)/robotworld-ParticleFilter.Po
 	-rm -f ./$(DEPDIR)/robotworld-RectangleShape.Po
 	-rm -f ./$(DEPDIR)/robotworld-Robot.Po
 	-rm -f ./$(DEPDIR)/robotworld-RobotShape.Po
@@ -1501,6 +1595,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/robotworld-FileTraceFunction.Po
 	-rm -f ./$(DEPDIR)/robotworld-Goal.Po
 	-rm -f ./$(DEPDIR)/robotworld-GoalShape.Po
+	-rm -f ./$(DEPDIR)/robotworld-KalmanFilter.Po
 	-rm -f ./$(DEPDIR)/robotworld-LaserDistanceSensor.Po
 	-rm -f ./$(DEPDIR)/robotworld-Lidar.Po
 	-rm -f ./$(DEPDIR)/robotworld-LineShape.Po
@@ -1516,6 +1611,9 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/robotworld-Notifier.Po
 	-rm -f ./$(DEPDIR)/robotworld-ObjectId.Po
 	-rm -f ./$(DEPDIR)/robotworld-Observer.Po
+	-rm -f ./$(DEPDIR)/robotworld-Odometry.Po
+	-rm -f ./$(DEPDIR)/robotworld-Particle.Po
+	-rm -f ./$(DEPDIR)/robotworld-ParticleFilter.Po
 	-rm -f ./$(DEPDIR)/robotworld-RectangleShape.Po
 	-rm -f ./$(DEPDIR)/robotworld-Robot.Po
 	-rm -f ./$(DEPDIR)/robotworld-RobotShape.Po

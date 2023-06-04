@@ -20,9 +20,12 @@
 #include <string>
 #include <thread>
 
+#include "Odometry.hpp"
 #include "Compass.hpp"
 #include "Lidar.hpp"
+#include "KalmanFilter.hpp"
 #include "FileReader.hpp"
+#include "ParticleFilter.hpp"
 
 namespace Messaging
 {
@@ -250,6 +253,21 @@ namespace Model
 			//@}
 
 			/**
+			 * Returns the believed route of the kalman filter
+			 */
+			std::vector<wxPoint> getKalmanRoute();
+
+			/**
+			* Returns the believed route of the Particle filter
+			*/
+			std::vector<wxPoint> getParticleFilterRoute();
+
+			/**
+			 * Returns the particles that are created
+			 */
+			std::vector<Particle> getParticles();
+
+			/**
 			 * @name Variables for painting the sensor activity on the screen
 			 */
 			//@{
@@ -259,7 +277,6 @@ namespace Model
 			// Radar
 			PointCloud currentRadarPointCloud; // The latest radar point cloud
 			//@}
-
 		protected:
 			/**
 			 *
@@ -340,6 +357,15 @@ namespace Model
 			 */
 			FileReader fileReader;
 			const std::string settingFileName = "sensor_configurations.txt";
+			/**
+			 * Object for the kalman filter
+			 */
+			KalmanFilter kalman;
+
+			/**
+			 * Object for the particle filter
+			 */
+			ParticleFilter particleFilter;
 	};
 } // namespace Model
 #endif // ROBOT_HPP_

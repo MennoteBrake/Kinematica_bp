@@ -11,6 +11,8 @@
 #include "Wall.hpp"
 #include "Shape2DUtils.hpp"
 
+#include "Logger.hpp"
+
 Lidar::Lidar() : stdev(0)
 {
 
@@ -60,7 +62,7 @@ std::vector<double> Lidar::measureDistance(const wxPoint& robotPosition)
 				dist = Utils::Shape2DUtils::distance(robotPosition,interSection);
 			}
 		}
-		if (dist < 1025)
+		if (dist < 1025 && dist != 0)
 		{
 			distances.push_back(Utils::MathUtils::deviateData(stdev, dist));
 		}

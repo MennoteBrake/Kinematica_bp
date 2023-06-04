@@ -11,7 +11,13 @@
 class Odometry {
 public:
 	Odometry();
+	Odometry(double stdev);
 	virtual ~Odometry();
+
+	double measureOdometry(double speed);
+
+private:
+	double stdev;
 };
 
 #endif /* SRC_ODOMETRY_HPP_ */

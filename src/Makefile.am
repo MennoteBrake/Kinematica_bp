@@ -41,7 +41,12 @@ robotworld_SOURCES 	= 	AbstractActuator.cpp	\
 						Widgets.cpp		\
 						Lidar.cpp	\
 						Compass.cpp	\
-						FileReader.cpp		
+						FileReader.cpp		\
+						Matrix.inc	\ 
+						KalmanFilter.cpp \
+						Odometry.cpp \
+						Particle.cpp \
+						ParticleFilter.cpp
 
 robotworld_CPPFLAGS 	=	$(AM_CPPFLAGS) $(ROBOTWORLD_CPPFLAGS) $(WX_CPPFLAGS)
 

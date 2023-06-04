@@ -24,7 +24,7 @@ namespace Utils
 	{
 		std::random_device rd;
 		std::mt19937 rng(rd());
-		std::uniform_real_distribution<double> uni((stdev * -1), stdev);
+		std::uniform_real_distribution<> uni((stdev * -1), stdev);
 		return (data + uni(rng));
 	}
 } //namespace Utils

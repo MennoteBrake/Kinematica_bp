@@ -398,6 +398,11 @@ namespace Application
 																//OnWorld2(event);
 																break;
 															}
+															case 2:
+															{
+
+																break;
+															}
 															default:
 															{
 																TRACE_DEVELOP("Unknown filter selection");
