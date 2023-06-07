@@ -89,6 +89,7 @@ namespace Application
 			wxCheckBox* drawOpenSetCheckbox;
 			wxSpinCtrl* speedSpinCtrl;
 			wxRadioBox* worldNumber;
+			wxRadioBox* filterSelected;
 
 			wxPanel* buttonPanel;
 
@@ -100,6 +101,10 @@ namespace Application
 
 			void OnDrawOpenSet( wxCommandEvent& anEvent);
 			void OnSpeedSpinCtrlUpdate( wxCommandEvent& anEvent);
+			void OnFilterSelected1( wxCommandEvent& anEvent);
+			void OnFilterSelected2( wxCommandEvent& anEvent);
+			void OnFilterSelected3( wxCommandEvent& anEvent);
+
 			void OnWorld1( wxCommandEvent& anEvent);
 			void OnWorld2( wxCommandEvent& anEvent);
 			void OnWorld3( wxCommandEvent& anEvent);

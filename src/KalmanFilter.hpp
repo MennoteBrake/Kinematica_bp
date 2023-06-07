@@ -14,36 +14,60 @@
 
 class KalmanFilter {
 public:
+	/**
+	 * Constructs a KalmanFilter object
+	 */
 	KalmanFilter();
 	virtual ~KalmanFilter();
 
-	void initValues(wxPoint startPosition);
-	void calculatePosition(wxPoint position, const double& odometryMeasurement, const double& compassMeasurement);
+	/**
+	 * Initializes the different matrices.
+	 */
+	void initValues(const wxPoint& startPosition);
+	/**
+	 * Calculates the belief, and runs the kalman filter.
+	 */
+	void calculatePosition(const wxPoint& position, const double& odometryMeasurement, const double& compassMeasurement);
 
+	/**
+	 * Getter for the driven route.
+	 */
 	std::vector<wxPoint> getDrivenRoute();
+	/**
+	 * Clears the driven route.
+	 */
+	void clearDrivenRoute();
+	/**
+	 * Getter for the belief.
+	*/
+	wxPoint getBelief() const;
+	/**
+	 * Setter for the belief.
+	 */
+	void setBelief(wxPoint belief);
 
 private:
-	void calculatePredictedStateVector(wxPoint position);
+	void calculatePredictedStateVector(const wxPoint& position);
 	void calculatePredictedCovarianceMatrix();
 	void calculateKalmanGain();
-	void calculateMeasurementUpdate(double distanceDriven, double compassData);
+	void calculateMeasurementUpdate(const double& distanceDriven, const double& compassData);
 	void calculateAdjustedStateVector();
 	void calculateAdjustedProcessCovariance();
 
 	std::vector<wxPoint> drivenRoute;
 	wxPoint belief;
-	Matrix<double, 2, 2> A;// = { { 1, 0 }, { 0, 1 } };
-	Matrix<double, 2, 1> Xk_1;// = { static_cast<double>(belief.x), static_cast<double>(belief.y) };
-	Matrix<double, 2, 2> B;// = { { 1, 0 }, { 0, 1 } };
-	Matrix<double, 2, 1> Wk;// = { 0, 0 };
+	Matrix<double, 2, 2> A;
+	Matrix<double, 2, 1> Xk_1;
+	Matrix<double, 2, 2> B;
+	Matrix<double, 2, 1> Wk;
 	Matrix<double, 2, 1> Xkp;
-	Matrix<double, 2, 2> Pk_1;// = { { 100, 0 }, { 0, 100 } };
-	Matrix<double, 2, 2> Qk;// = { { 25, 0 }, { 0, 25 } };
-	Matrix<double, 2, 2> H;// = { { 1, 0 }, { 0, 1 } };
-	Matrix<double, 2, 2> R;// = { { 4, 0 }, { 0, 4 } };
+	Matrix<double, 2, 2> Pk_1;
+	Matrix<double, 2, 2> Qk;
+	Matrix<double, 2, 2> H;
+	Matrix<double, 2, 2> R;
 	Matrix<double, 2, 1> Yt;
-	Matrix<double, 2, 2> C;// = { { 1, 0 }, { 0, 1 } };
-	Matrix<double, 2, 1> Z;// = { 0, 0 };
+	Matrix<double, 2, 2> C;
+	Matrix<double, 2, 1> Z;
 	Matrix<double, 2, 2> Pkp;
 	Matrix<double, 2, 2> K;
 };

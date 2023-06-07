@@ -12,10 +12,20 @@
 
 class Lidar {
 public:
+	/**
+	 * Constructs a Lidar object with a stdev of 0
+	 */
 	Lidar();
+	/**
+	 * Constructs a Lidar object
+	 */
 	Lidar(double stdev);
 	virtual ~Lidar();
-
+	/**
+	 * Measures distance from the specified position
+	 *
+	 * robotPosition the position to measure from
+	 */
 	std::vector<double> measureDistance(const wxPoint& robotPosition);
 private:
 	double stdev;

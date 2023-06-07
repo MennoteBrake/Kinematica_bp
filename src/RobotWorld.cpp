@@ -307,7 +307,7 @@ namespace Model
 			RobotWorld::getRobotWorld().newWall( wxPoint(780 ,1024), wxPoint(1024, 400) ,false); // @suppress("Avoid magic numbers")
 
 			RobotWorld::getRobotWorld().newWall( wxPoint(7,234), wxPoint(419,234) ,false); // @suppress("Avoid magic numbers")
-			RobotWorld::getRobotWorld().newGoal( "Goal", wxPoint(320,285),false); // @suppress("Avoid magic numbers")
+			RobotWorld::getRobotWorld().newGoal( "Goal", wxPoint(900,195),false); // @suppress("Avoid magic numbers")
 
 
 			notifyObservers();

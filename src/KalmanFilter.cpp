@@ -10,31 +10,30 @@
 #include "Compass.hpp"
 #include <cmath>
 
-KalmanFilter::KalmanFilter() {
-	// TODO Auto-generated constructor stub
-
+KalmanFilter::KalmanFilter()
+{
 }
 
-KalmanFilter::~KalmanFilter() {
-	// TODO Auto-generated destructor stub
+KalmanFilter::~KalmanFilter()
+{
 }
 
-void KalmanFilter::initValues(wxPoint startPosition)
+void KalmanFilter::initValues(const wxPoint& startPosition)
 {
 	belief = startPosition;
 	A = { { 1, 0 }, { 0, 1 } };
-	Xk_1 = { static_cast<double>(belief.x), static_cast<double>(belief.y) };
+	Xk_1 = {(double)belief.x, (double)belief.y};
 	B = { { 1, 0 }, { 0, 1 } };
 	Wk = { 0, 0 };
 	Pk_1 = { { 100, 0 }, { 0, 100 } };
-	Qk = { { 25, 0 }, { 0, 25 } };
+	Qk = { { 1, 0 }, { 0, 1 } };
 	H = { { 1, 0 }, { 0, 1 } };
-	R = { { 99.5, 10}, { 10, 99.5 } };//{ { 4, 0 }, { 0, 4 } };
+	R = { { 5, 0}, { 0, 5 } };
 	C = { { 1, 0 }, { 0, 1 } };
 	Z = { 0, 0 };
 }
 
-void KalmanFilter::calculatePosition(wxPoint position, const double& odometryMeasurement, const double& compassMeasurement)
+void KalmanFilter::calculatePosition(const wxPoint& position, const double& odometryMeasurement, const double& compassMeasurement)
 {
 	calculatePredictedStateVector(position);
 	calculatePredictedCovarianceMatrix();
@@ -43,7 +42,7 @@ void KalmanFilter::calculatePosition(wxPoint position, const double& odometryMea
 	calculateAdjustedStateVector();
 	calculateAdjustedProcessCovariance();
 
-	belief = wxPoint(Xk_1[0][0], Xk_1[1][0]);
+	belief = wxPoint((int)Xk_1[0][0], (int)Xk_1[1][0]);
 	drivenRoute.push_back(belief);
 }
 
@@ -52,7 +51,7 @@ std::vector<wxPoint> KalmanFilter::getDrivenRoute()
 	return drivenRoute;
 }
 
-void KalmanFilter::calculatePredictedStateVector(wxPoint position)
+void KalmanFilter::calculatePredictedStateVector(const wxPoint& position)
 {
 	/**
 	 * Xkp = X * Xk_1 + B * Uk + Wk
@@ -65,7 +64,6 @@ void KalmanFilter::calculatePredictedStateVector(wxPoint position)
 	 * Uk = control vector
 	 * Wk = Predicted process noice vector
 	 */
-
 	Matrix<double, 2, 1> Uk = {static_cast<double>(position.x - Xk_1[0][0]), static_cast<double>(position.y - Xk_1[1][0])};
 	Xkp = A * Xk_1 + B * Uk + Wk;
 }
@@ -102,13 +100,11 @@ void KalmanFilter::calculateKalmanGain()
 	K = (Pkp * H) * ((H * Pkp * H.transpose()) + R).inverse();
 }
 
-void KalmanFilter::calculateMeasurementUpdate(double distanceDriven, double compassData)
+void KalmanFilter::calculateMeasurementUpdate(const double& distanceDriven, const double& compassData)
 {
 	/**
 	 * Yt = C * Xkm + Zk
 	 */
-	// TODO CHECK THIS FORMULA AND VAR NAMES
-
 	Matrix<double, 2, 1> measurementData = { distanceDriven * -std::cos(compassData), distanceDriven * -std::sin(compassData) };
 	Matrix<double, 2, 1> Xkm = Xk_1 + measurementData;
 	Yt = C * Xkm + Z;
@@ -141,12 +137,21 @@ void KalmanFilter::calculateAdjustedProcessCovariance()
 	 * H = Matrix to remove differences
 	 * Pkp = The predicted covariance matrix
 	 */
-
-	//TODO check for H
-
 	Pk_1 = (K.identity() - K * H) * Pkp;
 }
 
+void KalmanFilter::clearDrivenRoute()
+{
+	drivenRoute.clear();
+}
 
+wxPoint KalmanFilter::getBelief() const
+{
+		return belief;
+}
 
+void KalmanFilter::setBelief(wxPoint belief)
+{
+	this->belief = belief;
+}
 

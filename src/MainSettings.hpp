@@ -44,11 +44,20 @@ namespace Application
 			 *
 			 */
 			void setWorldNumber( unsigned long aWorldNumber);
+			/**
+			 * Gets the number that is used for selecting a filter
+			 */
+			unsigned long getFilterSelected() const;
+			/**
+			 * Sets the number that is used for selecting the filter
+			 */
+			void setFilterSelected( unsigned long aFilterSelected);
 
 		private:
 			bool drawOpenSet;
 			unsigned long speed;
 			unsigned long worldNumber;
+			unsigned long filterSelected;
 	};
 
 } /* namespace Application */

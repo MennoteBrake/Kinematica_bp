@@ -27,14 +27,14 @@ namespace Model
 	 */
 	Robot::Robot() : Robot("", wxDefaultPosition)
 	{
-		fileReader.setFileName(settingFileName);
+		fileReader.setFileName(FileReader::settingFileName);
 	}
 	/**
 	 *
 	 */
 	Robot::Robot( const std::string& aName) : Robot(aName, wxDefaultPosition)
 	{
-		fileReader.setFileName(settingFileName);
+		fileReader.setFileName(FileReader::settingFileName);
 	}
 	/**
 	 *
@@ -54,7 +54,7 @@ namespace Model
 		attachSensor( laserSensor);
 		// We use the real position for starters, not an estimated position.
 		startPosition = position;
-		fileReader.setFileName(settingFileName);
+		fileReader.setFileName(FileReader::settingFileName);
 	}
 	/**
 	 *
@@ -436,9 +436,6 @@ namespace Model
 				sensor->setOn();
 			}
 
-//			Lidar lidar(10);
-//			lidar.measureDistance(getPosition());
-
 			// The runtime value always wins!!
 			speed = static_cast<float>(Application::MainApplication::getSettings().getSpeed());
 
@@ -453,8 +450,31 @@ namespace Model
 
 			Odometry odometer(0.1);
 			Compass compass = Compass(2);
+			Lidar lidar(10);
 			kalman.initValues(startPosition);
+
+			particleFilter.setBelief(startPosition);
 			particleFilter.generateParicles(300);
+
+			kalman.clearDrivenRoute();
+			particleFilter.clearDrivenRoute();
+
+			bool kalmanSelected = false;
+			bool particleSelected = false;
+
+			switch(Application::MainApplication::getSettings().getFilterSelected())
+			{
+			case 0:
+				kalmanSelected = true;
+			break;
+			case 1:
+				particleSelected = true;
+			break;
+			case 2:
+				particleSelected = true;
+				kalmanSelected = true;
+			break;
+			}
 
 			unsigned pathPoint = 0;
 			while (position.x > 0 && position.x < 1024 && position.y > 0 && position.y < 1024 && pathPoint < path.size()) // @suppress("Avoid magic numbers")
@@ -493,9 +513,14 @@ namespace Model
 				}
 
 				// Update the belief
-				//kalman.calculatePosition(vertex.asPoint(), odometer.measureOdometry(speed), compass.getDirection(front));
-
-
+				if (kalmanSelected)
+				{
+					kalman.calculatePosition(vertex.asPoint(), odometer.measureOdometry(speed), compass.getDirection(front));
+				}
+				if (particleSelected)
+				{
+					particleFilter.calculatePosition(position, lidar.measureDistance(getPosition()));
+				}
 
 				// Stop on arrival or collision
 				if (arrived(goal) || collision())

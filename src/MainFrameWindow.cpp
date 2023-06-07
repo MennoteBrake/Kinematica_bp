@@ -56,7 +56,8 @@ namespace Application
 																drawOpenSetCheckbox(nullptr),
 																speedSpinCtrl(nullptr),
 																worldNumber(nullptr),
-																buttonPanel( nullptr)
+																buttonPanel( nullptr),
+																filterSelected(nullptr)
 	{
 		initialise();
 	}
@@ -379,7 +380,7 @@ namespace Application
 			"Kalman en Particle Filter"
 		};
 
-		sizer->Add(	worldNumber = makeRadiobox(	panel,
+		sizer->Add(	filterSelected = makeRadiobox(	panel,
 												filterSelectArray,
 												[this](wxCommandEvent& event)
 												{
@@ -390,17 +391,17 @@ namespace Application
 														{
 															case 0:
 															{
-//																//OnWorld1(event);
+																OnFilterSelected1(event);
 																break;
 															}
 															case 1:
 															{
-																//OnWorld2(event);
+																OnFilterSelected2(event);
 																break;
 															}
 															case 2:
 															{
-
+																OnFilterSelected3(event);
 																break;
 															}
 															default:
@@ -476,6 +477,7 @@ namespace Application
 		drawOpenSetCheckbox->SetValue(mainSettings.getDrawOpenSet());
 		speedSpinCtrl->SetValue(static_cast<int>(mainSettings.getSpeed()));
 		worldNumber->SetSelection(static_cast<int>(mainSettings.getWorldNumber()));
+		filterSelected->SetSelection(static_cast<int>(mainSettings.getFilterSelected()));
 
 		if(MainApplication::isArgGiven("-debug_grid"))
 		{
@@ -649,6 +651,36 @@ namespace Application
 
 		MainSettings& mainSettings = MainApplication::getSettings();
 		mainSettings.setSpeed(speedSpinCtrl->GetValue());
+	}
+	/**
+	 *
+	 */
+	void MainFrameWindow::OnFilterSelected1( wxCommandEvent& anEvent)
+	{
+		TRACE_DEVELOP(anEvent.GetString().ToStdString());
+
+		MainSettings& mainSettings = MainApplication::getSettings();
+		mainSettings.setFilterSelected(filterSelected->GetSelection());
+	}
+	/**
+	 *
+	 */
+	void MainFrameWindow::OnFilterSelected2( wxCommandEvent& anEvent)
+	{
+		TRACE_DEVELOP(anEvent.GetString().ToStdString());
+
+		MainSettings& mainSettings = MainApplication::getSettings();
+		mainSettings.setFilterSelected(filterSelected->GetSelection());
+	}
+	/**
+	 *
+	 */
+	void MainFrameWindow::OnFilterSelected3( wxCommandEvent& anEvent)
+	{
+		TRACE_DEVELOP(anEvent.GetString().ToStdString());
+
+		MainSettings& mainSettings = MainApplication::getSettings();
+		mainSettings.setFilterSelected(filterSelected->GetSelection());
 	}
 	/**
 	 *

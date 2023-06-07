@@ -356,7 +356,7 @@ namespace Model
 			 * Object of the fileReader, can be used to read settings from the configuration file
 			 */
 			FileReader fileReader;
-			const std::string settingFileName = "sensor_configurations.txt";
+
 			/**
 			 * Object for the kalman filter
 			 */
