@@ -11,6 +11,8 @@
 #include <vector>
 #include "Logger.hpp"
 
+/* static */ std::string FileReader::settingFileName = "sensor_configurations.txt";
+
 FileReader::FileReader() : fileName("")
 {
 }

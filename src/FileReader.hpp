@@ -45,6 +45,7 @@ public:
 	 * @param settingToRead The setting to read
 	 */
 	double readSettingFromFile(const Setting& settingToRead);
+	static std::string settingFileName;// = "sensor_configurations.txt";
 
 private:
 
