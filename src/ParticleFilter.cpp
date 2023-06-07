@@ -3,6 +3,11 @@
  *
  *  Created on: May 29, 2023
  *      Author: menno
+ *
+ *
+ *  In this object the formula's from ILectureOnline have been used instead of the one's from Thrun.
+ *  This was done because these formulas were able to be written as a command with the functions.
+ *  In the WoR-Robots-Dictaat.pdf there is a table that translates this to the functions from Thrun. See Tabel 10.1
  */
 
 #include "ParticleFilter.hpp"
