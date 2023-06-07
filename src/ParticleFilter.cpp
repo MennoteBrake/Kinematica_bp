@@ -57,7 +57,7 @@ void ParticleFilter::generateParicles(const uint16_t& numberOfParticles)
 
 void ParticleFilter::predictState(const wxPoint& position)
 {
-	std::uniform_int_distribution<> random(-2, 2);
+	std::uniform_int_distribution<> random(0, 2);
 
 	for (Particle &particle : particles)
 	{
