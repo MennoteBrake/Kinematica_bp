@@ -10,6 +10,7 @@
 #include "RobotWorldCanvas.hpp"
 #include "Shape2DUtils.hpp"
 #include "Trace.hpp"
+#include <vector>
 
 #include <cmath>
 
@@ -200,6 +201,25 @@ namespace View
 			for (const PathAlgorithm::Vertex &vertex : path)
 			{
 				dc.DrawPoint( vertex.asPoint());
+			}
+		}
+
+		std::vector<wxPoint> kalmanRoute = getRobot()->getKalmanRoute();
+		if(kalmanRoute.size()>2){
+			dc.SetPen(wxPen("BLUE", borderWidth, wxPENSTYLE_SOLID));
+			for(unsigned short i = 0; i < kalmanRoute.size()-1; ++i)
+			{
+				dc.DrawLine(kalmanRoute.at(i), kalmanRoute.at(i+1));
+			}
+		}
+
+		std::vector<wxPoint> particleFilterRoute = getRobot()->getParticleFilterRoute();
+		if(particleFilterRoute.size() > 2)
+		{
+			dc.SetPen(wxPen("GREEN", borderWidth, wxPENSTYLE_SOLID));
+			for (unsigned short i = 0; i < particleFilterRoute.size()-1; ++i)
+			{
+				dc.DrawLine(particleFilterRoute.at(i), particleFilterRoute.at(i+1));
 			}
 		}
 	}

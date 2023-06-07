@@ -520,28 +520,6 @@ namespace View
 			dc.SetPen( wxPen( wxColor( 0, 0, 0), 1)); // black line, 1 pixels thick
 			dc.DrawLine( startActionShape->getCentre().x, startActionShape->getCentre().y, endActionPoint.x, endActionPoint.y);
 		}
-		Model::RobotPtr robot = Model::RobotWorld::getRobotWorld().getRobot("Robot");
-		if (robot != nullptr)
-		{
-			std::vector<wxPoint> kalmanRoute = robot->getKalmanRoute();
-			if(kalmanRoute.size()>2){
-				dc.SetPen(wxPen( wxColor(255, 0, 0), 1));
-				for(unsigned short i = 0; i < kalmanRoute.size()-1; ++i)
-				{
-					dc.DrawLine(kalmanRoute.at(i), kalmanRoute.at(i+1));
-				}
-			}
-//			std::vector<Particle> particles = robot->getParticles();
-			for (Particle particle : robot->getParticles())
-			{
-				uint8_t size = 2; //hier de grote bepalen op basis van de zekerheid
-				dc.DrawCircle(particle.getPosition(), size);
-			}
-
-		}
-//
-//
-//
 	}
 	/**
 	 *
