@@ -32,7 +32,7 @@ public:
 	/**
 	 * Getter for the driven route.
 	 */
-	std::vector<wxPoint> getDrivenRoute();
+	std::vector<wxPoint> getDrivenRoute() const;
 	/**
 	 * Clears the driven route.
 	 */

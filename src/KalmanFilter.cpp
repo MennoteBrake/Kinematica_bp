@@ -46,7 +46,7 @@ void KalmanFilter::calculatePosition(const wxPoint& position, const double& odom
 	drivenRoute.push_back(belief);
 }
 
-std::vector<wxPoint> KalmanFilter::getDrivenRoute()
+std::vector<wxPoint> KalmanFilter::getDrivenRoute() const
 {
 	return drivenRoute;
 }
